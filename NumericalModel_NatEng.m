@@ -43,7 +43,7 @@ tic
     W_HX = 0.254;                                                           %Heat exchanger width (m) - 10 inches total
     H_ch = 0.003;                                                           %Channel height (m)
     H_PCM = 0.035;                                                          %Height of PCM (m)
-    th_wall = 0.35e-3;                                                      %Wall thickness (m)
+    th_wall = 0.35e-3;                                                       %Wall thickness (m)
     D_h = (4*W_HX*H_ch)/(2*W_HX + 2*H_ch);                                  %Channel hydraulic diameter (m)
     Aspect = H_ch/W_HX;                                                     %Channel aspect ratio (-)
     A_cs = W_HX*H_ch;                                                       %Channel cross-sectional area (m^2)
@@ -282,11 +282,7 @@ for t = 1:1:timesteps-1
         dhdt(2:N_x-1,2:N_y-1,t) = 1/M_PCM *(k_PCM_ll*dy*W_HX/dx*(T(1:N_x-2,2:N_y-1,t) - T(2:N_x-1,2:N_y-1,t)) + k_PCM_ll*dy*W_HX/dx*(T(3:N_x,2:N_y-1,t) - T(2:N_x-1,2:N_y-1,t)) + k_PCM_T*dx*W_HX/dy*(T(2:N_x-1,3:N_y,t) - T(2:N_x-1,2:N_y-1,t)) + k_PCM_T*dx*W_HX/dy*(T(2:N_x-1,1:N_y-2,t) - T(2:N_x-1,2:N_y-1,t)));
         
         %Fluid Energy Balance (With Fluid Conduction)
-        if m_dot_f>0
-         	dTdt_f(1,t) = 1/(cp_bar_f*M_bar_f)*(m_dot_f*cp_bar_f*(T_f_in(t)-T_f(1,t)) - 2*q_f_PCM(1,t) + 2*k_bar_f*H_ch*W_HX/dx*(T_f_in(t)-T_f(1,t)) + k_bar_f*H_ch*W_HX/dx*(T_f(2,t) - T_f(1,t)));
-        else
-            dTdt_f(1,t) = 1/(cp_bar_f*M_bar_f)*(m_dot_f*cp_bar_f*(T_f_in(t)-T_f(1,t)) - 2*q_f_PCM(1,t) + k_bar_f*H_ch*W_HX/dx*(T_f(2,t) - T_f(1,t)));
-        end
+        dTdt_f(1,t) = 1/(cp_bar_f*M_bar_f)*(m_dot_f*cp_bar_f*(T_f_in(t)-T_f(1,t)) - 2*q_f_PCM(1,t) + k_bar_f*H_ch*W_HX/dx*(T_f(2,t) - T_f(1,t)));
         dTdt_f(2:N_x-1,t) = 1/(cp_bar_f*M_bar_f)*(m_dot_f*cp_bar_f*(T_f(1:N_x-2,t)-T_f(2:N_x-1,t)) - 2*q_f_PCM(2:N_x-1,t) + k_bar_f*H_ch*W_HX/dx*(T_f(1:N_x-2,t)-T_f(2:N_x-1,t)) + k_bar_f*H_ch*W_HX/dx*(T_f(3:N_x,t) - T_f(2:N_x-1,t)));
         dTdt_f(N_x,t) = 1/(cp_bar_f*M_bar_f)*(m_dot_f*cp_bar_f*(T_f(N_x-1,t)-T_f(N_x,t)) - 2*q_f_PCM(N_x,t) + k_bar_f*H_ch*W_HX/dx*(T_f(N_x-1,t) - T_f(N_x,t)));
 
