@@ -3,8 +3,11 @@
 The numerical model used to generate the data in the manuscript Rate Capability and Ragone Plots for Thermal Energy Storage is provided in the GitHub repository (NREL/ThermalRagone). The code was developed in MATLAB R2019b. The MATLAB software is required to run the code, although no non-standard hardware is needed. Descriptions of the files are provided below:
 
 •	NumericalModel_NatEng.m is the main code that sets up the numerical model and calculates the local temperatures, enthalpies and important global parameters such as the specific energy and power. More information about the numerical model is provided in the Methods section of the main paper.
+
 •	ductflow.m calculates the friction factor and Nusselt number of the glycol-water mixture flowing through the flat channel (duct). The correlation used depends on the Reynolds number of the fluid.
+
 •	The GlycolProperties folder includes MATLAB codes that calculate the specific heat, conductivity, viscosity, and density of a propylene-glycol water mixture using an artificial neural network.
+
 •	The PCMProperties folder includes enthalpy and temperature data for different potential PCMs. For more information about the PCM properties, please see the Supplemental Information.
 
 The steps to run the code are described below. The current code outputs sample data for discharging a thermal storage device with a PCM of tetradecane embedded in a graphite matrix (see Supplemental Information for material properties) at a C-rate of 1. The storage device has the baseline geometry used in the paper.
