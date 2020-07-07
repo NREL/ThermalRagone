@@ -1,0 +1,24 @@
+****Instructions for using neural network based glycol property routines in MATLAB****
+
+1. Add the property library files (EG_Cp, PG_Cp etc: total 8 script files) in your working folder or MATLAB path
+
+2. The property routines are based on EES property reference data so they will agree well with EES models
+
+3. The units of input and output are:
+	
+	Temeprature - K
+	Concentration - %
+	Specific Heat - kJ/kg-K
+	Thermal Conductivity: W/m-K
+	Density: kg/m^3
+	Dynamic Viscosity: kg/m-s
+	
+
+4. The property routines are called by using the function and three property inputs as a vector input in its transpose form. Sample command is:
+	Cp=EG_Cp([T,C]');
+   Note: Matrix containing multiple property input sets can be provided for calculations.
+
+Range of applicability: 
+
+EG: Temperature (-30,50) deg. C, Concentration: (0,50) %
+PG: Temperature (-30,50) deg. C, Concentration: (0,50) %
